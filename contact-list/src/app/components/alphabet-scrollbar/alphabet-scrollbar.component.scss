@@ -1,0 +1,18 @@
+.alphabet-scrollbar {
+  position: fixed;
+  right: 0;
+  font-size: 12px;
+  text-align: center;
+  display: inline-block;
+  z-index: 2;
+  top: 34%;
+  list-style: none;
+  vertical-align: middle;
+  button {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    border:none;
+    background: transparent
+  }
+}

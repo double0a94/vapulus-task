@@ -1,0 +1,54 @@
+.form-container {
+  padding: 15px 30px 10px 30px;
+  h3 {
+    border-bottom: 2px solid #addacb;
+    padding-bottom: 7px;
+    color: #8d8d8d;
+    margin-bottom: 33px;
+  }
+  .form-row {
+    padding: 0 !important;
+  }
+  div {
+    margin: 0px 0px 0px 0px !important;
+
+    a {
+      .uploadedImage {
+        height: 100px;
+        width: 100px;
+      }
+      .white-text {
+        margin-left: 22px;
+        padding-left: 22px !important;
+        height: 100px !important;
+        width: 100px !important;
+      }
+    }
+    h4 {
+      color: #8d8d8d;
+      margin-top: 15px;
+    }
+
+    input {
+      border-bottom: 2px solid #addacb;
+    }
+
+    .inputPhoneNo {
+      width: 89%;
+    }
+
+    .inputCountryCode {
+      width: 10%;
+      margin-right: 5px;
+    }
+  }
+
+  button {
+    border-radius: 9px !important;
+    width: 40%;
+  }
+
+  ::-webkit-input-placeholder {
+    color: #8d8d8d;
+  }
+}

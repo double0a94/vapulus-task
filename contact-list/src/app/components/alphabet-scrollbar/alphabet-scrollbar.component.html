@@ -1,0 +1,10 @@
+<div class="d-flex flex-column alphabet-scrollbar">
+  <button
+    href=""
+    *ngFor="let contact of scrollBarData"
+    id="letter_"
+    class="letter"
+    (click)="scrollTo(contact)"
+    >{{ contact }}</button
+  >
+</div>

@@ -1,0 +1,119 @@
+<div class="d-flex flex-column">
+  <!-- Search -->
+  <div class="searchContainer d-flex justify-content-center align-items-center">
+    <input
+      type="search"
+      id="searchBar"
+      placeholder="&#xF002; Search Contacts"
+      class="form-control"
+      [(ngModel)]="search"
+    />
+  </div>
+
+  <!-- Alphabetic Scrollbar component  -->
+  <app-alphabet-scrollbar
+    [alphabetScrollbarInit]="data"
+  ></app-alphabet-scrollbar>
+
+  <!-- Add Contacts Button -->
+
+  <button
+    type="button"
+    class=" d-flex justify-content-between align-items-center addContactsBtn"
+    mdbBtn
+    mdbWavesEffect
+    [routerLink]="['/add-contact']"
+  >
+    Add new Contact
+    <i class="fas fa-plus  mr-2  p-3 grey-text" aria-hidden="true"></i>
+  </button>
+
+  <!-- Recent Contacts -->
+  <div class="divider border-top">
+    latest Contacts
+  </div>
+  <!-- animate most recent data length -->
+  <div [@listAnimation]="recentData.length">
+    <div
+      class="list-group-flush listCard h-25"
+      *ngFor="let contact of recentData; let i = index"
+    >
+      <div class="list-group-item">
+        <div
+          class="d-flex w-100 justify-content-start align-items-center"
+          *ngIf="!contact.letterDivider"
+        >
+          <div *ngIf="!contact.image" class="imgContainer">
+            <i
+              class="far fa-image  mr-2 grey p-3 white-text rounded-circle align-self-center"
+              aria-hidden="true"
+            ></i>
+          </div>
+          <div *ngIf="contact.image" class="imgContainer">
+            <img
+              class="rounded-circle
+              img-fluid uploadedImage"
+              aria-hidden="true"
+              [src]="contact.image"
+            />
+          </div>
+          <div class="align-self-stretch listInfo">
+            <h5>{{ contact.firstName + " " + contact.lastName }}</h5>
+            <p>{{ contact.email }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All Contacts -->
+  <!-- animate contact list -->
+  <div [@listAnimation]="data.length">
+    <div
+      class="list-group-flush listCard"
+      *ngFor="let contact of data | filter: search; let i = index"
+    >
+      <div
+        [ngClass]="
+          contact.letterDivider
+            ? 'border-bottom-0 divider'
+            : i != 0 && data[i - 1].letterDivider
+            ? 'border-top-0 list-group-item'
+            : 'list-group-item'
+        "
+      >
+        <div
+          class="d-flex w-100 justify-content-start align-items-center mb-0"
+          *ngIf="!contact.letterDivider"
+        >
+          <div *ngIf="!contact.image" class="imgContainer">
+            <i
+              class="far fa-image  mr-2 grey p-3 white-text rounded-circle "
+              aria-hidden="true"
+            ></i>
+          </div>
+          <div *ngIf="contact.image" class="imgContainer">
+            <img
+              class="rounded-circle
+            img-fluid uploadedImage"
+              aria-hidden="true"
+              [src]="contact.image"
+            />
+          </div>
+          <div
+            class="d-flex flex-column justify-content-start align-items-start mb-0 listInfo"
+          >
+            <h5>{{ contact.firstName + " " + contact.lastName }}</h5>
+            <p>{{ contact.email }}</p>
+          </div>
+        </div>
+        <div [attr.id]="contact.letterDivider" *ngIf="contact.letterDivider">
+          {{ contact.letterDivider }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="(data | filter: search).length < 1">
+    No Contact Found
+  </div>
+</div>
