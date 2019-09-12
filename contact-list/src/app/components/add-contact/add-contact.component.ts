@@ -43,8 +43,8 @@ export class AddContactComponent implements OnInit {
       firstName: "",
       lastName: "",
       email: "",
-      mobileNumber: Number,
-      countryCode: Number
+      mobileNumber: "",
+      countryCode: ""
     });
   }
 
@@ -83,6 +83,27 @@ export class AddContactComponent implements OnInit {
     return this.contactForm.get("countryCode");
   }
 
+  // format mobile number form input
+  formatMobileNo(value) {
+    // replace any letters
+    value = value.replace(/[^0-9]+/g, "");
+    if (value.length > 3) {
+      if (value.indexOf(" ") > -1) value = value.replace(" ", "");
+      const firstStr = value.slice(0, 3);
+      const secondStr = value.slice(3, value.length);
+      this.contactForm.controls["mobileNumber"].setValue(
+        firstStr + " " + secondStr
+      );
+    }
+  }
+
+  formatCountryCode(value) {
+    console.log(value);
+    value = value.replace(/[^0-9]+/g, "");
+    if (value.indexOf("+") > -1) value.replace("+", "");
+    this.contactForm.controls["countryCode"].setValue("+" + value);
+  }
+
   // Read the image local url
   imageSrc = null;
   readURL(event: any): void {
@@ -109,6 +130,17 @@ export class AddContactComponent implements OnInit {
       contactData.countryCode &&
       contactData.mobileNumber
     ) {
+      // Check if the form got invalid fields
+      if (this.contactForm.invalid) {
+        this.flashMessage.show(
+          "* Please make sure to fix all the invalid fields",
+          {
+            classes: ["alert", "alert-danger"]
+          }
+        );
+        return;
+      }
+
       // Add image source
       contactData.image = this.imageSrc;
 

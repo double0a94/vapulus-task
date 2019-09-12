@@ -81,15 +81,14 @@
           <input
             mdbInput
             mdbValidate
-            pattern="[+ 0-9]*"
-            type="number"
+            type="text"
             class="form-control"
             placeholder="+44"
-            max="4"
-            name="input"
+            name="countryCode"
             id="countryCode"
             name="countryCode"
             formControlName="countryCode"
+            (keyup)="formatCountryCode($event.target.value)"
           />
           <label for="countryCode"></label>
 
@@ -110,15 +109,14 @@
           <input
             mdbInput
             mdbValidate
-            type="number"
-            pattern="[0-9]*"
+            type="text"
             class="form-control"
             id="mobileNumber"
             placeholder="567 2249"
-            max="7"
             id="mobileNumber"
             name="mobileNumber"
             formControlName="mobileNumber"
+            (keyup)="formatMobileNo($event.target.value)"
           />
           <label for="mobileNumber"></label>
 
